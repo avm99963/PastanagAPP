@@ -1,0 +1,21 @@
+#butons {
+	position: absolute;
+	bottom: 5%;
+	right: 0;
+}
+
+#butons button {
+	font-size: 36px;
+	height: 100px;
+	width: 70%;
+	color: white;
+	text-decoration: none;
+}
+
+button#win {
+	background-color: green;
+}
+
+button#lose {
+	background-color: red;
+}
