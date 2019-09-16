@@ -1,0 +1,11 @@
+select {
+	font-size: 24px;
+	height: 2em;
+	width: 80%;
+}
+
+input[type="submit"] {
+	font-size: 24px;
+	height: 2em;
+	width: 17%;
+}
