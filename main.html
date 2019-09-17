@@ -4,6 +4,8 @@
 		<title>Pàgina de l'usuari</title>
 		<link rel="stylesheet" href="./css/basic.css" />
 		<link rel="stylesheet" href="./css/main.css" />
+		
+		<script src="./js/utils.js"></script>
 	</head>
 	<body>
 		<div id="outter-container">
@@ -22,5 +24,10 @@
 			<button id="win">L'he matat</button>
 			<button id="lose">M'han matat</button>
 		</div>
+		
+		<script>
+			var info = JSON.parse(b64DecodeUnicode(getUrlParameter("info")));
+			console.log(info);
+		</script>
 	</body>
 </html>

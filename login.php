@@ -1,6 +1,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script src="./js/utils.js"></script>
 <?php
         $servername = "fdb22.awardspace.net";
         $username = "3155560_users";
@@ -38,7 +39,7 @@
 echo '
 <script>
 let infoString = JSON.stringify(db_info);
-let infoBase64 = btoa(infoString);
+let infoBase64 = b64EncodeUnicode(infoString);
 
 window.location.href = "./main.html?info=" + infoBase64;
 </script>
