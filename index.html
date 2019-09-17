@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<title>Pàgina de benvinguda</title>
 		<link rel="stylesheet" href="./css/basic.css" />
 		<link rel="stylesheet" href="./css/login.css" />
@@ -9,13 +10,13 @@
 			<div id="inner-container">
 				<h1>Selecciona el teu nom</h1>
 				<h3>Per entrar al joc de la Pastanaga Assessina</h3>
-				<form action="login.php" method="GET">
-					<select>
-						<option>Oriol Toll</option>
-						<option>Carlota Corrales</option>
-						<option>Jordi Condom</option>
-						<option>David Ariza</option>
-						<option>Martina Colás</option>			
+				<form action="login.php" method="POST">
+					<select name="user">
+						<option value="1">Oriol Toll</option>
+						<option value="3">Carlota Corrales</option>
+						<option value="2">Jordi Condom</option>
+						<option value="4">David Ariza</option>
+						<option value="5">Martina Colás</option>			
 					</select>
 					<input type="submit" value="Entrar" />
 				</form>
