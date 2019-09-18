@@ -6,12 +6,21 @@ function getUrlParameter(name) {
 };
 
 function send_request(id, msg) {
+	console.log(id, msg);
+	
 	$.ajax({
-		'url': '../php/request.php', 
+		'url': './php/request.php', 
 		'type': 'GET',
-		'dataType': 'json',
+		'contentType': 'application/json; charset=utf-8',
 		'data': { 'id': id, 'msg': msg }, 
-		'success': function(data) { console.log('Success'); },
-		'error': function(xhr, status, error) { alert('Error! Torna-ho a intentar o contacta amb l\'Andreu: +34681236024'); console.log(xhr); }
+		'success': function(data) {
+			console.log('Success');
+			if (msg <= 2) $.notify('Confirmació enviada', 'success');
+			else $.notify('Resposta guardada', 'success');
+		},
+		'error': function(xhr, status, error) { 
+			console.log('Error! Torna-ho a intentar o contacta amb l\'Andreu: +34681236024');
+			console.log(xhr.responseText);
+		}
 	});
 }

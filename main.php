@@ -6,28 +6,20 @@
 		<link rel="stylesheet" href="./css/main.css" />
 	
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js"></script>
 		<script src="./js/utils.js"></script>
 		
-		<?php require './php/login.php'; ?>
+		<? require './php/login.php'; ?>
+		
 		<script>
-			if (<?=$user->mort?>) {
-				// User is dead
-				document.write("Venga niño, pitjor que el Condom, MORT.");
-			} else {				
-				let dead = false;
-				let killed = false;
-				
-				// Check for requests
-				if(<?=$user->requested?> == 1) dead = confirm("El teu assassí ha dit que t'ha matat, és veritat?");
-				if(<?=$user->requested?> == 2) killed = confirm("En/na <?=$victim->nom()?> ha dit que l'has matat, és veritat?");
-				
-				// Confirm/deny request
-				if (dead) send_request(<?=$user->id?>, 3); // confirm death
-				else send_request(<?=$user->id?>, 4); // deny death
-				if (killed) send_request(<?=$victim->id?>, 3); // confirm kill
-				else send_request(<?=$user->id?>, 4); // deny kill
-			}
+			let mort = <?=$user->mort?>;
+			let requested = <?=$user->requested?>;
+			let userid = <?=$user->id?>;
+			let victimid = <?=$victim->id?>;
+			let victimnom = "<?=$victim->nom()?>";
 		</script>
+		
+		<script src="./js/confirmation.js"></script>
 	</head>
 	<body>
 		<div id="outter-container">
