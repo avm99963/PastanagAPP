@@ -8,7 +8,7 @@
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="./js/utils.js"></script>
 		
-		<?php require 'login.php'; ?>
+		<?php require './php/login.php'; ?>
 		<script>
 			if (<?=$user->mort?>) {
 				// User is dead

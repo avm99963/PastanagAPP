@@ -7,7 +7,7 @@ function getUrlParameter(name) {
 
 function send_request(id, msg) {
 	$.ajax({
-		'url': '../request.php', 
+		'url': '../php/request.php', 
 		'type': 'GET',
 		'dataType': 'json',
 		'data': { 'id': id, 'msg': msg }, 
