@@ -9,7 +9,9 @@
 		<script src="https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js"></script>
 		<script src="./js/utils.js"></script>
 		
-		<? require './php/login.php'; ?>
+		<?php 
+			require './php/login.php';
+		?>
 		
 		<script>
 			let mort = <?=$user->mort?>;
@@ -18,14 +20,14 @@
 			let victimid = <?=$victim->id?>;
 			let victimnom = "<?=$victim->nom()?>";
 		</script>
-		
-		<script src="./js/confirmation.js"></script>
+	
 	</head>
 	<body>
 		<div id="outter-container">
 			<div id="inner-container">
 				<h2>Hola <name id="user_name"><?=$user->nom()?></name>,</h2>
 				<h3>La teva víctima és:</h3>
+				<div style="display:none;" id="state">0</div>
 				
 				<div class="victima">
 					<img width="300px" src="./imgs/<?=$victim->id?>.png" />
@@ -40,7 +42,17 @@
 		</div>
 		
 		<script>
-			
+			$(document).ready(function() {
+				let checking = setInterval(function() {
+					$.ajax({ url: "./php/checkrequests.php", data: { id: userid }, type: 'GET',
+						success: function(data) {
+							$("#state").load("./php/checkrequests.php?id=" + userid, function() {
+								if (!mort) requested = check_requests($("#state").html(), victimnom, victimid, userid);
+								else clearInterval(checking);
+							});
+						}});
+				}, 1000);
+			});
 		</script>
 	</body>
 </html>
