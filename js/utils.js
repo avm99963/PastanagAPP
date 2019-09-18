@@ -12,6 +12,6 @@ function send_request(id, msg) {
 		'dataType': 'json',
 		'data': { 'id': id, 'msg': msg }, 
 		'success': function(data) { console.log('Success'); },
-		'error': function(xhr, status, error) {}
+		'error': function(xhr, status, error) { alert('Error! Torna-ho a intentar o contacta amb l\'Andreu: +34681236024'); console.log(xhr); }
 	});
 }
