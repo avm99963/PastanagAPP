@@ -6,8 +6,6 @@ function getUrlParameter(name) {
 };
 
 function send_request(id, msg) {
-	console.log(id, msg);
-	
 	$.ajax({
 		'url': './php/request.php', 
 		'type': 'GET',

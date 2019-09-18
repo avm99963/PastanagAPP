@@ -46,8 +46,8 @@
 				let checking = setInterval(function() {
 					$.ajax({ url: "./php/checkrequests.php", data: { id: userid }, type: 'GET',
 						success: function(data) {
-							$("#state").load("./php/checkrequests.php?id=" + userid, function() {
-								if (!mort) requested = check_requests($("#state").html(), victimnom, victimid, userid);
+							$("#state").load("./php/checkrequests.php?id=" + userid, function(response, status, xhr) {
+								if (!mort) requested = check_requests(response, victimnom, victimid, userid);
 								else clearInterval(checking);
 							});
 						}});

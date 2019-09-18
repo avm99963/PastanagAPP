@@ -24,7 +24,6 @@
 		<script>
 			$.post("./php/getusers.php", function(data, status){
 				$("#list").html(data);
-				console.log(data);
 			});
 		</script>
 	</body>
