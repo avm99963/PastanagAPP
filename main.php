@@ -10,14 +10,16 @@
 		
 		<?php require 'login.php'; ?>
 		<script>
-			if (<?=$user->mort?>) alert("Venga niño, pitjor que el Condom, MORT.");
+			if (<?=$user->mort?>) document.write("Venga niño, pitjor que el Condom, MORT.");
 			else {				
 				let dead = false
 				let killed = false
 				if(<?=$user->requested?> == 1) dead = confirm("El teu assassí ha dit que t'ha matat, és veritat?");
 				if(<?=$user->requested?> == 2) killed = confirm("En/na <?=$victim->nom()?> ha dit que l'has matat, és veritat?");
-				if (dead) send_request(<?=$user->id?>, 3);
-				if (killed) send_request(<?=$victim->id?>, 4);
+				if (dead) send_request(<?=$user->id?>, 3); // confirm death
+				else send_request(<?=$user->id?>, 5); // deny death
+				if (killed) send_request(<?=$victim->id?>, 4); // confirm kill
+				else send_request(<?=$user->id?>, 5); // deny kill
 			}
 		</script>
 	</head>

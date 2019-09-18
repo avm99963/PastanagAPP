@@ -11,9 +11,7 @@ function send_request(id, msg) {
 		'type': 'GET',
 		'dataType': 'json',
 		'data': { 'id': id, 'msg': msg }, 
-		'success': function(data) { alert("S'ha avisat a l'altre jugador"); },
-		'error': function(xhr, status, error) {
-			alert(xhr.responseText);
-		 }
+		'success': function(data) { console.log('Success'); },
+		'error': function(xhr, status, error) {}
 	});
 }
