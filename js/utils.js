@@ -12,9 +12,9 @@ function send_request(id, msg) {
 		'contentType': 'application/json; charset=utf-8',
 		'data': { 'id': id, 'msg': msg }, 
 		'success': function(data) {
-			console.log('Success');
 			if (msg <= 2) $.notify('Confirmació enviada', 'success');
 			else $.notify('Resposta guardada', 'success');
+			console.log(data);
 		},
 		'error': function(xhr, status, error) { 
 			console.log('Error! Torna-ho a intentar o contacta amb l\'Andreu: +34681236024');
@@ -38,6 +38,6 @@ function check_requests(requested, victimnom, victimid, userid) {
 		else send_request(userid, 4); // deny kill/death
 	}	
 
-	// Reset
-	return requested = 0;
+	// Return mort
+	return dead;
 }
