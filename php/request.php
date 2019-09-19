@@ -20,6 +20,8 @@
 	}
 	if ($_GET['msg'] == 4) $query = "UPDATE users SET requested=0 WHERE id=".$_GET['id']; // deny request
 
+	$a = "UPDATE users SET quimata=".$_GET['id']
+
 	// Fetch the information of the user
 	if ($result = $conn->query($query)) echo $query;
 	else die("Wrong query: " . $query);

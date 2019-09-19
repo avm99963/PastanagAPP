@@ -36,9 +36,8 @@
 				$user->curs = $row[2];
 				$user->grau = $row[3];
 				$user->quimata = $row[4];
-				$user->quielmata = $row[5];
-				$user->requested = $row[6];
-				$user->mort = $row[7];
+				$user->requested = $row[5];
+				$user->mort = $row[6];
 			}
 			$result->close();
 		} else {
