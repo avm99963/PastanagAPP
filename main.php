@@ -14,11 +14,18 @@
 		?>
 		
 		<script>
-			let mort = <?=$user->mort?>;
-			let requested = <?=$user->requested?>;
-			let userid = <?=$user->id?>;
-			let victimid = <?=$victim->id?>;
-			let victimnom = "<?=$victim->nom()?>";
+			let user = {
+				'id': <?=$user->id?>,
+				'quimata': <?=$user->quimata?>,
+				'requested': <?=$user->requested?>,
+				'mort': <?=$user->mort?>
+			};
+			
+			let victim = {
+				'id': <?=$victim->id?>,
+				'quimata': <?=$victim->quimata?>,
+				'nom': "<?=$victim->nom()?>"
+			};
 		</script>
 	
 	</head>
@@ -37,18 +44,18 @@
 			</div>
 		</div>
 		<div id="butons">
-			<button id="win" onclick="js: send_request(<?=$victim->id?>,1);">L'he matat</button>
-			<button id="lose" onclick="js: send_request(<?=$user->id?>,2);">M'han matat</button>
+			<button id="win" onclick="js: send_request(user, victim, 'REQ KILL');">L'he matat</button>
+			<button id="lose" onclick="js: send_request(user, victim, 'REQ DEAD');">M'han matat</button>
 		</div>
 		
 		<script>
 			$(document).ready(function() {
 				let checking = setInterval(function() {
-					$.ajax({ url: "./php/checkrequests.php", data: { id: userid }, type: 'GET',
+					$.ajax({ url: "./php/checkrequests.php", data: { id: user.id }, type: 'GET',
 						success: function(data) {
-							$("#state").load("./php/checkrequests.php?id=" + userid, function(response, status, xhr) {
+							$("#state").load("./php/checkrequests.php?id=" + user.id, function(response, status, xhr) {
 								console.log(response);
-								if (!mort) mort = check_requests(response, victimnom, victimid, userid);
+								if (!user.mort) user.mort = check_requests(response, user, victim);
 								else clearInterval(checking);
 							});
 						}});

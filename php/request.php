@@ -12,20 +12,25 @@
 	// Do the query
 	$query = "";
 	$query2 = "";
-	if ($_GET['msg'] == 1) $query = "UPDATE users SET requested=".$_GET['msg']." WHERE id=".$_GET['id']; // request kill
-	if ($_GET['msg'] == 2) $query = "UPDATE users SET requested=".$_GET['msg']." WHERE quimata=".$_GET['id']; // request dead
-	if ($_GET['msg'] == 3) {
-		$query = "UPDATE users SET mort=1 WHERE id=".$_GET['id']; // confirm dead/killed
-		$query2 = "UPDATE users SET requested=0 WHERE quimata=".$_GET['id']; // erase request from killer
+	if ($_GET['msg'] == "REQ KILL") $query = "UPDATE users SET requested=1 WHERE id=".(int)$_GET['victim_id']; // request kill
+	if ($_GET['msg'] == "REQ DEAD") $query = "UPDATE users SET requested=2 WHERE quimata=".(int)$_GET['user_id']; // request dead
+	if ($_GET['msg'] == "CONF DEAD") {
+		// User gets killed
+		$query = "UPDATE users SET requested=0, quimata=".(int)$_GET['user_quimata']." WHERE quimata=".$_GET['user_id']; // assign new victim to killer
+		$query2 = "UPDATE users SET quimata=0, mort=1 WHERE id=".(int)$_GET['user_id']; // confirm victim dead/killed
 	}
-	if ($_GET['msg'] == 4) $query = "UPDATE users SET requested=0 WHERE id=".$_GET['id']; // deny request
-
-	$a = "UPDATE users SET quimata=".$_GET['id']
+	if ($_GET['msg'] == "CONF KILL") {
+		// Victim gets killed
+		$query = "UPDATE users SET requested=0, quimata=".(int)$_GET['victim_quimata']." WHERE quimata=".$_GET['victim_id']; // assign new victim to killer
+		$query2 = "UPDATE users SET quimata=0, mort=1 WHERE id=".(int)$_GET['victim_id']; // confirm victim dead/killed
+	}
+	if ($_GET['msg'] == "DENY REQ") $query = "UPDATE users SET requested=0 WHERE id=".(int)$_GET['user_id']; // deny request
 
 	// Fetch the information of the user
-	if ($result = $conn->query($query)) echo $query;
+	if ($query != "" and $result = $conn->query($query)) echo $query;
 	else die("Wrong query: " . $query);
-	if ($result = $conn->query($query2)) echo "\n" . $query2;
+	if ($query2 != "" and $result = $conn->query($query2)) echo "\n" . $query2;
+	else echo "\nNo second query";
 
 	// Close connection
 	$conn->close();

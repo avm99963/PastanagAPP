@@ -5,12 +5,17 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
-function send_request(id, msg) {
+function send_request(user, victim, msg) {
 	$.ajax({
 		'url': './php/request.php', 
 		'type': 'GET',
 		'contentType': 'application/json; charset=utf-8',
-		'data': { 'id': id, 'msg': msg }, 
+		'data': { 'user_id': user.id,
+				  'victim_id': victim.id,
+				  'user_quimata': user.quimata,
+				  'victim_quimata': victim.quimata,
+				  'msg': msg
+				}, 
 		'success': function(data) {
 			if (msg <= 2) $.notify('Confirmació enviada', 'success');
 			else $.notify('Resposta guardada', 'success');
@@ -23,19 +28,19 @@ function send_request(id, msg) {
 	});
 }
 
-function check_requests(requested, victimnom, victimid, userid) {			
+function check_requests(requested, user, victim) {	
 	let dead = false;
 	let killed = false;
 	
 	if (requested != 0) {
 		// Check for requests
 		if(requested == 1) dead = confirm("El teu assassí ha dit que t'ha matat, és veritat?");
-		if(requested == 2) killed = confirm("En/na " + victimnom + " ha dit que l'has matat, és veritat?");
+		if(requested == 2) killed = confirm("En/na " + victim.nom + " ha dit que l'has matat, és veritat?");
 		
 		// Confirm/deny request
-		if (dead) send_request(userid, 3); // confirm death
-		else if (killed) send_request(victimid, 3); // confirm kill
-		else send_request(userid, 4); // deny kill/death
+		if (dead) send_request(user, victim, "CONF DEAD"); // confirm death
+		else if (killed) send_request(user, victim, "CONF KILL"); // confirm kill
+		else send_request(user, victim, "DENY REQ"); // deny kill/death
 	}	
 
 	// Return mort
