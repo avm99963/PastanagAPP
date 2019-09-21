@@ -4,7 +4,7 @@
 
 	// Do the query
 	$queries = [""];
-	$victimid = "ANY (SELECT quimata FROM users WHERE id=".(int)$_POST['user_id'].")";
+	$victimid = "ANY (SELECT quimata FROM (SELECT * FROM users) AS victims WHERE id=".(int)$_POST['user_id'].")";
 	
 	if ($_POST['msg'] == "REQ KILL") $queries = ["UPDATE users SET requested=1 WHERE id=".$victimid]; 						// request kill
 	if ($_POST['msg'] == "REQ DEAD") $queries = ["UPDATE users SET requested=2 WHERE quimata=".(int)$_POST['user_id']]; 	// request dead
@@ -16,6 +16,6 @@
 	// Fetch the information of the user
 	foreach ($queries as $query) {
 		if ($query != "" and $result = query($query)) echo $query;
-		else die("Wrong query: " . $query);
+		else die("Query failed: " . $result);
 	}
 ?>

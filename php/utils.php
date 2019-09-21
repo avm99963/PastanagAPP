@@ -20,7 +20,7 @@
 		$conn->set_charset("utf8");
 		
 		// Execute query and save result
-		$result = $conn->query($query);
+		if (!$result = $conn->query($query)) $result = $conn->error;
 		
 		// Close the connection 
 		$conn->close();
@@ -54,7 +54,7 @@
 			}
 			$result->close();
 		} else {
-			die("Wrong query: " . $query);
+			die("Query failed: " . $query);
 		}
 		
 		if ($id > 0) return $users[0];

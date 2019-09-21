@@ -1,4 +1,4 @@
-<option>Selecciona usuari...</option>
+<option selected disabled hidden>Selecciona usuari...</option>
 
 <?php
 	require '../credentials.php';

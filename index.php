@@ -27,9 +27,9 @@
 				$("#list").html(data);
 								
 				userid = <?=isset($_COOKIE['user']) ? $_COOKIE['user'] : -1 ?>;
+				username = $('option[value=' + userid + ']').text();
 		
 				if (userid > 0) {
-					username = $('option[value=' + userid + ']').text();
 					redir = confirm("Has entrat com a usuari " + username + " anteriorment, vols tornar-ho a fer?");
 					if (redir) window.location.href = 'main.php';
 				}
