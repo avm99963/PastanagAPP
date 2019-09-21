@@ -1,4 +1,5 @@
 <?php
+	require '../credentials.php';
 	require 'utils.php';
 	
 	// Set the 'user' POST and COOKIE variable

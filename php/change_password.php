@@ -1,4 +1,5 @@
 <?php
+	require '../credentials.php';
 	require 'utils.php';
 
 	// Check if confirmation is the same

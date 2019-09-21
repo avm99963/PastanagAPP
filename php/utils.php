@@ -13,14 +13,9 @@
 	}
 	
 	function query($query) {
-		// Define MySQL login variables
-		$servername = "localhost"; // "andreuhuguet78654.ipagemysql.com";
-		$username = "root"; // "andreu";
-		$password = ""; // "1234";
-		$dbname = "pastanaga"; // "fme_2019";
-
 		// Create connection
-		$conn = new mysqli($servername, $username, $password, $dbname);
+		$credentials = new Credentials();
+		$conn = new mysqli($credentials->servername, $credentials->username, $credentials->password, $credentials->dbname);
 		if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
 		$conn->set_charset("utf8");
 		

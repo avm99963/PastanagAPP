@@ -19,6 +19,7 @@
 		<script src="./js/animations.js"></script>
 		
 		<?php 
+			require './credentials.php';
 			require './php/utils.php';
 			$user = get_users($_COOKIE['user']);
 			$victim = get_users($user->quimata);
