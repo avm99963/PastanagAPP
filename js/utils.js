@@ -53,7 +53,7 @@ function update_info(user) {
 			
 			// Check if user is dead
 			if (!user.mort) user.mort = check_requests(info, user);
-			else window.location.href= "./index.php";
+			else window.location.href= "./dead.php";
 			
 			// Check if there has been a change of victim					
 			if (info.quimata != user.quimata) {

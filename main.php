@@ -22,7 +22,7 @@
 			require './php/utils.php';
 			$user = get_users($_COOKIE['user']);
 			$victim = get_users($user->quimata);
-			if ($user->mort) die('Puto mort de merda');
+			if ($user->mort) header("Location: ./dead.php");
 		?>
 		
 		<script>
