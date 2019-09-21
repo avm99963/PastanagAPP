@@ -12,7 +12,7 @@
 			<div id="inner-container">
 				<h1>Selecciona el teu nom</h1>
 				<h3>Per entrar al joc de la Pastanaga Assessina</h3>
-				<form action="main.php" method="GET">
+				<form action="./php/login.php" method="POST">
 					<select name="user" id="list">
 					</select>
 					

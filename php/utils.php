@@ -16,12 +16,13 @@
 		$users = [];
 		
 		// Define MySQL login variables
-		$servername = "localhost"; // "fdb22.awardspace.net";
-		$username = "root"; // "3155560_users";
-		$password = ""; // "btechnoro@fox4news.info";
+		$servername = "localhost"; // "andreuhuguet78654.ipagemysql.com";
+		$username = "root"; // "andreu";
+		$password = ""; // "1234";
+		$dbname = "pastanaga"; // "fme_2019";
 
 		// Create connection
-		$conn = new mysqli($servername, $username, $password, "pastanaga");
+		$conn = new mysqli($servername, $username, $password, $dbname);
 		if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
 		$conn->set_charset("utf8");
 		

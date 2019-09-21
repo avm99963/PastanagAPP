@@ -1,6 +1,6 @@
 <?php
 	require '../php/utils.php';
-	$user = get_users($_GET['id']);
+	$user = get_users($_POST['id']);
 	
 	echo '{ ';
 	$first = true;

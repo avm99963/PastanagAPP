@@ -1,3 +1,9 @@
+<?php
+	if (!isset($_COOKIE['user'])) {
+		header("Location: ./main.php");
+		die();
+	}
+?>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -13,7 +19,10 @@
 		<script src="./js/animations.js"></script>
 		
 		<?php 
-			require './php/login.php';
+			require './php/utils.php';
+			$user = get_users($_COOKIE['user']);
+			$victim = get_users($user->quimata);
+			if ($user->mort) die('Puto mort de merda');
 		?>
 		
 		<script>

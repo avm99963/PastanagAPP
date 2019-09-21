@@ -8,12 +8,13 @@ function getUrlParameter(name) {
 function send_request(user, msg) {
 	$.ajax({
 		'url': './php/request.php', 
-		'type': 'GET',
-		'contentType': 'application/json; charset=utf-8',
+		'type': 'POST',
+		// 'contentType': 'application/json; charset=utf-8',
 		'data': { 'user_id': user.id,
 				  'user_quimata': user.quimata,
 				  'msg': msg
-				}, 
+				},
+		dataType:'text',		
 		'success': function(data) {
 			$.notify('Resposta guardada', 'success');
 			console.log(data);
@@ -43,15 +44,15 @@ function check_requests(info, user) {
 
 function update_info(user) {
 	$.ajax({
-		url: "./ajax/checkrequests.php",
+		url: "./ajax/userinfo.php",
 		data: { id: user.id },
-		type: 'GET',
+		type: 'POST',
 		success: function(response, status, xhr) {
 			let info = JSON.parse(response);
 			
 			// Check if user is dead
 			if (!user.mort) user.mort = check_requests(info, user);
-			else location.reload();
+			else window.location.href= "./index.php";
 			
 			// Check if there has been a change of victim					
 			if (info.quimata != user.quimata) {
