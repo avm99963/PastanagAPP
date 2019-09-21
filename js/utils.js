@@ -5,44 +5,52 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
-function send_request(user, victim, msg) {
+function send_request(user, msg) {
 	$.ajax({
 		'url': './php/request.php', 
 		'type': 'GET',
 		'contentType': 'application/json; charset=utf-8',
 		'data': { 'user_id': user.id,
-				  'victim_id': victim.id,
 				  'user_quimata': user.quimata,
-				  'victim_quimata': victim.quimata,
 				  'msg': msg
 				}, 
 		'success': function(data) {
-			if (msg <= 2) $.notify('Confirmació enviada', 'success');
-			else $.notify('Resposta guardada', 'success');
+			$.notify('Resposta guardada', 'success');
 			console.log(data);
+			
+			if (msg == 'CONF KILL' || msg == 'CONF DEAD') {
+				$(".victima").fadeOut(400, function() {
+					$(".victima").load('./ajax/victiminfo.php?userid=' + user.id);
+					$(".victima").fadeIn(400);
+				});
+			}
 		},
 		'error': function(xhr, status, error) { 
-			console.log('Error! Torna-ho a intentar o contacta amb l\'Andreu: +34681236024');
-			console.log(xhr.responseText);
+			$.notify('Error! Torna-ho a intentar o contacta amb l\'Andreu: +34681236024');
+			console.log(error);
 		}
 	});
 }
 
-function check_requests(requested, user, victim) {	
+function check_requests(info, user) {	
 	let dead = false;
-	let killed = false;
 	
-	if (requested != 0) {
+	if (info.requested) {
 		// Check for requests
-		if(requested == 1) dead = confirm("El teu assassí ha dit que t'ha matat, és veritat?");
-		if(requested == 2) killed = confirm("En/na " + victim.nom + " ha dit que l'has matat, és veritat?");
-		
+		if(info.requested) dead = confirm("El teu assassí ha dit que t'ha matat, és veritat?");
+	
 		// Confirm/deny request
-		if (dead) send_request(user, victim, "CONF DEAD"); // confirm death
-		else if (killed) send_request(user, victim, "CONF KILL"); // confirm kill
-		else send_request(user, victim, "DENY REQ"); // deny kill/death
+		if (dead) send_request(user, "CONF DEAD"); // confirm death
+		else send_request(user, "DENY REQ"); // deny kill/death
 	}	
 
 	// Return mort
-	return dead;
+	return dead || info.mort;
+}
+
+function change_victim(user) {
+	$(".victima").fadeOut(400, function() {
+		$(".victima").load('./ajax/victiminfo.php?userid=' + user.id);
+		$(".victima").fadeIn(400);
+	});
 }

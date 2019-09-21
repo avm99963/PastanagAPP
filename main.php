@@ -18,13 +18,11 @@
 				'id': <?=$user->id?>,
 				'quimata': <?=$user->quimata?>,
 				'requested': <?=$user->requested?>,
-				'mort': <?=$user->mort?>
-			};
-			
-			let victim = {
-				'id': <?=$victim->id?>,
-				'quimata': <?=$victim->quimata?>,
-				'nom': "<?=$victim->nom()?>"
+				'mort': <?=$user->mort?>,
+				
+				'nom': "<?=$user->nomcomplet?>",
+				'curs': <?=$user->curs?>,
+				'grau': <?=$user->grau?>
 			};
 		</script>
 	
@@ -43,23 +41,31 @@
 				</div>
 			</div>
 		</div>
-		<div id="butons">
-			<button id="win" onclick="js: send_request(user, victim, 'REQ KILL');">L'he matat</button>
-			<button id="lose" onclick="js: send_request(user, victim, 'REQ DEAD');">M'han matat</button>
+		<div id="butons" class="options">
+			<button id="win" onclick="js: send_request(user, 'REQ KILL');">L'he matat</button>
 		</div>
 		
 		<script>
 			$(document).ready(function() {
+				// Set interval of checking
 				let checking = setInterval(function() {
-					$.ajax({ url: "./php/checkrequests.php", data: { id: user.id }, type: 'GET',
-						success: function(data) {
-							$("#state").load("./php/checkrequests.php?id=" + user.id, function(response, status, xhr) {
-								console.log(response);
-								if (!user.mort) user.mort = check_requests(response, user, victim);
-								else clearInterval(checking);
-							});
-						}});
-				}, 1000);
+					$.ajax({
+						url: "./ajax/checkrequests.php",
+						data: { id: user.id },
+						type: 'GET',
+						success: function(response, status, xhr) {
+							let info = JSON.parse(response);
+							if (!user.mort) user.mort = check_requests(info, user);
+							else location.reload();
+														
+							if (info.quimata != user.quimata) {
+								change_victim(info);
+								user = info;
+							}
+							
+							console.log(response);
+					}});
+				}, 1500);
 			});
 		</script>
 	</body>

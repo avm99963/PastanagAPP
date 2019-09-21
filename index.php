@@ -22,7 +22,7 @@
 		</div>
 		
 		<script>
-			$.post("./php/getusers.php", function(data, status){
+			$.post("./ajax/getusers.php", function(data, status){
 				$("#list").html(data);
 			});
 		</script>
