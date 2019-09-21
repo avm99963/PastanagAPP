@@ -1,6 +1,6 @@
 <?php
 	if (!isset($_COOKIE['user'])) {
-		header("Location: ./main.php");
+		header("Location: ./index.php");
 		die();
 	}
 ?>
@@ -43,8 +43,8 @@
 		<div id="outter-container">
 			<div id="inner-container">
 				<h2>Hola <name id="user_name"><?=$user->nom()?></name>,</h2>
-						
-				<div class="formulari_contrasenya <?=$user->md5password=="" ? 'show' : 'hidden'?>">
+				
+				<div class="formulari_contrasenya" style="display: none;">
 					<p>Sembla que no tens contrasenya, la gent podrà entrar a la teva compta...</p>
 					<form action="./php/change_password.php" method="POST">
 						<input type="hidden" value="<?=$_COOKIE['user']?>" name="userid">
@@ -71,6 +71,8 @@
 			$(document).ready(function() {
 				// Set interval of checking
 				let checking = setInterval(function() { update_info(user); }, 1500);
+				// Set to hidden or not the password prompt
+				if (<?=$user->md5password=="" ? 1 : 0?>) $(".formulari_contrasenya").show();
 			});
 		</script>
 	</body>
