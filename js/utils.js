@@ -17,13 +17,6 @@ function send_request(user, msg) {
 		'success': function(data) {
 			$.notify('Resposta guardada', 'success');
 			console.log(data);
-			
-			if (msg == 'CONF KILL' || msg == 'CONF DEAD') {
-				$(".victima").fadeOut(400, function() {
-					$(".victima").load('./ajax/victiminfo.php?userid=' + user.id);
-					$(".victima").fadeIn(400);
-				});
-			}
 		},
 		'error': function(xhr, status, error) { 
 			$.notify('Error! Torna-ho a intentar o contacta amb l\'Andreu: +34681236024');
@@ -48,9 +41,24 @@ function check_requests(info, user) {
 	return dead || info.mort;
 }
 
-function change_victim(user) {
-	$(".victima").fadeOut(400, function() {
-		$(".victima").load('./ajax/victiminfo.php?userid=' + user.id);
-		$(".victima").fadeIn(400);
-	});
+function update_info(user) {
+	$.ajax({
+		url: "./ajax/checkrequests.php",
+		data: { id: user.id },
+		type: 'GET',
+		success: function(response, status, xhr) {
+			let info = JSON.parse(response);
+			
+			// Check if user is dead
+			if (!user.mort) user.mort = check_requests(info, user);
+			else location.reload();
+			
+			// Check if there has been a change of victim					
+			if (info.quimata != user.quimata) {
+				change_victim(info);
+				user.quimata = info.quimata;
+			}
+			
+			console.log(response);
+	}});	
 }

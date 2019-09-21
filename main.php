@@ -2,12 +2,15 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Pàgina de l'usuari</title>
+		
 		<link rel="stylesheet" href="./css/basic.css" />
 		<link rel="stylesheet" href="./css/main.css" />
 	
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js"></script>
+		
 		<script src="./js/utils.js"></script>
+		<script src="./js/animations.js"></script>
 		
 		<?php 
 			require './php/login.php';
@@ -48,24 +51,7 @@
 		<script>
 			$(document).ready(function() {
 				// Set interval of checking
-				let checking = setInterval(function() {
-					$.ajax({
-						url: "./ajax/checkrequests.php",
-						data: { id: user.id },
-						type: 'GET',
-						success: function(response, status, xhr) {
-							let info = JSON.parse(response);
-							if (!user.mort) user.mort = check_requests(info, user);
-							else location.reload();
-														
-							if (info.quimata != user.quimata) {
-								change_victim(info);
-								user = info;
-							}
-							
-							console.log(response);
-					}});
-				}, 1500);
+				let checking = setInterval(function() { update_info(user); }, 1500);
 			});
 		</script>
 	</body>
