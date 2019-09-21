@@ -16,6 +16,7 @@
 					<select name="user" id="list">
 					</select>
 					
+					<input disabled required placeholder="Clau d'accés..." id="password" type="password" name="password"/>
 					<input type="submit" value="Entrar" />
 				</form>
 			</div>
@@ -24,6 +25,11 @@
 		<script>
 			$.post("./ajax/getusers.php", function(data, status){
 				$("#list").html(data);
+			});
+			
+			$('select').on('change', function() {
+				let nopassword = $('select option:selected').hasClass('nopassword');
+				$('#password').prop('disabled', nopassword);
 			});
 		</script>
 	</body>

@@ -12,9 +12,7 @@
 		}
 	}
 	
-	function get_users($id = 0) {
-		$users = [];
-		
+	function query($query) {
 		// Define MySQL login variables
 		$servername = "localhost"; // "andreuhuguet78654.ipagemysql.com";
 		$username = "root"; // "andreu";
@@ -26,12 +24,25 @@
 		if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
 		$conn->set_charset("utf8");
 		
-		// Do the query
+		// Execute query and save result
+		$result = $conn->query($query);
+		
+		// Close the connection 
+		$conn->close();
+		
+		// Return result of query
+		return $result;
+	}
+	
+	function get_users($id = 0) {
+		$users = [];
+		
+		// Prepare the query
 		$query = "SELECT * FROM users";
 		if ($id > 0) $query .= " WHERE id=".$id;
 
 		// Fetch the information of the user
-		if ($result = $conn->query($query)) {
+		if ($result = query($query)) {
 			while ($row = $result->fetch_row()) {
 				$user = new User();
 				
@@ -42,6 +53,7 @@
 				$user->quimata = $row[4];
 				$user->requested = $row[5];
 				$user->mort = $row[6];
+				$user->md5password = $row[7];
 				
 				array_push($users, $user);
 			}
@@ -49,9 +61,6 @@
 		} else {
 			die("Wrong query: " . $query);
 		}
-
-		// Close connection
-		$conn->close();
 		
 		if ($id > 0) return $users[0];
 		else return $users;

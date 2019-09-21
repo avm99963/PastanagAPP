@@ -43,8 +43,18 @@
 		<div id="outter-container">
 			<div id="inner-container">
 				<h2>Hola <name id="user_name"><?=$user->nom()?></name>,</h2>
+						
+				<div class="formulari_contrasenya <?=$user->md5password=="" ? 'show' : 'hidden'?>">
+					<p>Sembla que no tens contrasenya, la gent podrà entrar a la teva compta...</p>
+					<form action="./php/change_password.php" method="POST">
+						<input type="hidden" value="<?=$_COOKIE['user']?>" name="userid">
+						<input type="password" placeholder="Nova contrasenya..." name="password" /><br />
+						<input type="password" placeholder="Repeteix la contrasenya" name="confirmation"/><br />
+						<input type="submit">
+					</form>
+				</div>
+				
 				<h3>La teva víctima és:</h3>
-				<div id="state">0</div>
 				
 				<div class="victima">
 					<img width="300px" src="./imgs/<?=$victim->id?>.png" />

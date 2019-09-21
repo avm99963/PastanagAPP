@@ -46,6 +46,7 @@ function update_info(user) {
 	$.ajax({
 		url: "./ajax/userinfo.php",
 		data: { id: user.id },
+		dataType: 'text',
 		type: 'POST',
 		success: function(response, status, xhr) {
 			let info = JSON.parse(response);
