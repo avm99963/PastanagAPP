@@ -29,7 +29,7 @@
 		return $result;
 	}
 	
-	function get_users($id = 0) {
+	function get_users($id = 0, $getAsObjects = true) {
 		$users = [];
 		
 		// Prepare the query
@@ -39,16 +39,27 @@
 		// Fetch the information of the user
 		if ($result = query($query)) {
 			while ($row = $result->fetch_row()) {
-				$user = new User();
-				
-				$user->id = $row[0];
-				$user->nomcomplet = $row[1];
-				$user->curs = $row[2];
-				$user->grau = $row[3];
-				$user->quimata = $row[4];
-				$user->requested = $row[5];
-				$user->mort = $row[6];
-				$user->md5password = $row[7];
+				if ($getAsObjects) {
+					$user = new User();
+					$user->id = $row[0];
+					$user->nomcomplet = $row[1];
+					$user->curs = $row[2];
+					$user->grau = $row[3];
+					$user->quimata = $row[4];
+					$user->requested = $row[5];
+					$user->mort = $row[6];
+					$user->md5password = $row[7];
+				} else {
+					$user = [];
+					$user["id"] = $row[0];
+					$user["nomcomplet"] = $row[1];
+					$user["curs"] = $row[2];
+					$user["grau"] = $row[3];
+					$user["quimata"] = $row[4];
+					$user["requested"] = $row[5];
+					$user["mort"] = $row[6];
+					$user["md5password"] = $row[7];
+				}
 				
 				array_push($users, $user);
 			}
