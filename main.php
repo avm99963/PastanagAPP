@@ -69,24 +69,25 @@
 
 				<p>La teva víctima és:</p>
 
-				<table class="victima">
-					<tr>
-						<td><img id="victim_img" src="https://picsum.photos/id/<?=(int)$victim->id?>/200/200" /></td>
-						<td>
-							<div id="victim_name"><?=sanitize_html($victim->nomcomplet)?></div>
-							<div id="victim_curs_i_grau">
-								<span id="victim_curs"><?=(int)$victim->curs?></span>
-								-
-								<span id="victim_grau"><?=(int)$victim->grau?></span>
-							</div>
-							<div id="butons" class="options">
-								<button id="win" onclick="js: send_request(user, 'REQ KILL');">L'he matat</button>
-							</div>
-						</td>
-					</tr>
-				</table>
-
-				<div style="clear: both;"></div>
+        <div class="victima">
+          <table id="victim_info">
+            <tr>
+              <td><img id="victim_img" src="https://picsum.photos/id/<?=(int)$victim->id?>/200/200" /></td>
+              <td>
+                <div id="victim_name"><?=sanitize_html($victim->nomcomplet)?></div>
+                <div id="victim_curs_i_grau">
+                  <span id="victim_curs"><?=(int)$victim->curs?></span>
+                  -
+                  <span id="victim_grau"><?=(int)$victim->grau?></span>
+                </div>
+                <div id="butons" class="options">
+                  <button id="win" onclick="js: send_request(user, 'REQ KILL');">L'he matat</button>
+                </div>
+              </td>
+            </tr>
+          </table>
+				</div>
+    
 			</div>
 		</div>
 

@@ -15,5 +15,16 @@
 	  `password` varchar(100) NOT NULL DEFAULT ''
 	)";
 
+	/*
+	CREATE TABLE `morts` (
+	  `id` int(11) NOT NULL,
+	  `quimatava` int(11) NOT NULL,
+	  `assassi` int(11) NOT NULL,
+	  `curs` tinyint(1) NOT NULL,
+	  `grau` tinyint(1) NOT NULL,
+	  `data` date NOT NULL DEFAULT current_timestamp()
+	)
+	 */
+
 	if (query($create)) header("Location: ./index.php?dbname=".$dbname);
 ?>

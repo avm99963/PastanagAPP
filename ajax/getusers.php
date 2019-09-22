@@ -1,13 +1,20 @@
-<option selected disabled hidden>Selecciona usuari...</option>
-
 <?php
 	require '../credentials.php';
 	require '../php/utils.php';
 	$users = get_users(0);
 
+	$return = [];
+
 	foreach ($users as $user) {
-		$nopassword = $user->md5password == "" ? "nopassword" : "";
-		$mort = $user->mort ? "disabled" : "";
-		echo "<option ".$mort." class='".$nopassword."' value='".$user->id."'>".$user->nomcomplet."</option>\n";
+		if ($user->mort) continue;
+
+		$return[] = [
+			"id" => $user->id,
+			"nomcomplet" => $user->nomcomplet,
+			"grau" => $user->grau,
+			"curs" => $user->curs,
+			"nopassword" => ($user->md5password == "" ? "nopassword" : "")
+		];
 	}
-?>
+
+	echo json_encode($return);

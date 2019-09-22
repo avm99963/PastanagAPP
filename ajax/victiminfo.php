@@ -1,11 +1,13 @@
 <?php
 	require '../credentials.php';
 	require '../php/utils.php';
+	
 	$user = get_users($_GET['userid']);
+	if ($user->mort) die();
 	$victim = get_users($user->quimata);
 ?>
 
-<table class="victima">
+<table id="victim_info">
 	<tr>
 		<td><img id="victim_img" src="https://picsum.photos/id/<?=$victim->id?>/200/200" /></td>
 		<td>
