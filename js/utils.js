@@ -6,6 +6,9 @@ function getUrlParameter(name) {
 };
 
 function send_request(user, msg) {
+	// Check if user is alive
+	update_info(user);
+	
 	$.ajax({
 		'url': './php/request.php', 
 		'type': 'POST',

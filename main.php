@@ -1,7 +1,20 @@
-<?php
+<?php	
+	require './credentials.php';
+	require './php/utils.php';
+
 	if (!isset($_COOKIE['user'])) {
 		header("Location: ./index.php");
 		die();
+	} else if (isset($_COOKIE['password'])) {
+		$query_password = "SELECT password FROM users WHERE id=" . (int)$_COOKIE['user'];
+		if (query($query_password)->fetch_row()[0] != $_COOKIE['password']) {
+			// Unset variables
+			setcookie('user', '', -1, "/");
+			setcookie('password', '', -1, "/");
+			
+			header("Location: ./index.php?passwordchanged=1");
+			die();
+		}
 	}
 ?>
 <html>
@@ -21,8 +34,6 @@
 		<script src="./js/animations.js"></script>
 
 		<?php
-			require './credentials.php';
-			require './php/utils.php';
 			$user = get_users($_COOKIE['user']);
 			$victim = get_users($user->quimata);
 			if ($user->mort) header("Location: ./dead.php");
