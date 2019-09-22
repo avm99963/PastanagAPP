@@ -20,7 +20,7 @@
 		$conn->set_charset("utf8");
 		
 		// Execute query and save result
-		$result = $conn->query($query);
+		if (!$result = $conn->query($query)) echo $conn->error;
 		
 		// Close the connection 
 		$conn->close();
