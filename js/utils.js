@@ -67,3 +67,8 @@ function update_info(user) {
 			console.log(response);
 	}});	
 }
+
+function get_user_name(users, userid) {
+	for (let user of users) if (user.id == userid) return user.nomcomplet;
+	return "";
+}

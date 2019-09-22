@@ -52,12 +52,12 @@
 		<script src="./js/autocomplete.js"></script>
 		<script>
 			fetch("./ajax/getusers.php").then(result => result.json()).then(users => {
-				console.log(users);
 				autocomplete(document.getElementById("search-input"), users, "search");
-			
+				console.log(users);
+				
 				userid = <?=isset($_COOKIE['user']) ? (int)$_COOKIE['user'] : -1 ?>;
-				username = $('option[value=' + userid + ']').text();
-		
+				username = get_user_name(users, userid);
+
 				if (userid > 0) {
 					redir = confirm("Has entrat com a usuari " + username + " anteriorment, vols tornar-ho a fer?");
 					if (redir) window.location.href = 'main.php';
