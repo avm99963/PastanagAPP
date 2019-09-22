@@ -4,3 +4,9 @@ function change_victim(user) {
 		$(".victima").fadeIn(400);
 	});
 }
+
+function read_message(msg, type) {
+	$.notify(msg, type);
+	newURL = window.location.href.split('?')[0];
+	history.pushState({}, null, newURL);
+}

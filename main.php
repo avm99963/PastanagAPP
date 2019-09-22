@@ -59,11 +59,11 @@
 				<h2>Hola <name id="user_name"><?=$user->nom()?></name>,</h2>
 
 				<div class="formulari_contrasenya" style="display: none;">
-					<p>Sembla que no tens contrasenya, la gent podrà entrar a la teva compta...</p>
+					<p>Sembla que no tens clau d'accés, la gent podrà entrar a la teva compta...</p>
 					<form action="./php/change_password.php" method="POST">
 						<input type="hidden" value="<?=$_COOKIE['user']?>" name="userid">
-						<input type="password" placeholder="Nova contrasenya..." name="password" /><br />
-						<input type="password" placeholder="Repeteix la contrasenya" name="confirmation"/><br />
+						<input type="password" placeholder="Nova clau d'accés..." name="password" /><br />
+						<input type="password" placeholder="Repeteix la clau d'accés" name="confirmation"/><br />
 						<input type="submit">
 					</form>
 				</div>
@@ -92,7 +92,15 @@
 				// Set interval of checking
 				let checking = setInterval(function() { update_info(user); }, 1500);
 				// Set to hidden or not the password prompt
-				if (<?=$user->md5password=="" ? 1 : 0?>) $(".formulari_contrasenya").show();
+				if (<?=$user->md5password=="" ? 1 : 0?>) {
+					$.notify("No tens clau d'accés", "info");
+					$(".formulari_contrasenya").show();
+				}
+				
+				// Notify of messages
+				if (getUrlParameter("wrongconfirmation")) read_message("Les contrasenyes no coincideixen", "error");
+				if (getUrlParameter("errordb")) read_message("Hi ha hagut un problema a la base de dades, torna-ho a intentar", "error");
+				if (getUrlParameter("successpassword")) read_message("La teva clau d'accés s'ha guardat", "success");
 			});
 		</script>
 	</body>

@@ -4,7 +4,7 @@
 
 	// Check if confirmation is the same
 	if ($_POST['password'] != $_POST['confirmation']) {
-		header("Location: ../main.php?wrong_password=1");
+		header("Location: ../main.php?wrongconfirmation=1");
 		die();
 	} else {
 		// Execute query to change password

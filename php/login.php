@@ -22,13 +22,17 @@
 	
 	// Redirect if wrong
 	if ($real_password != "" && $real_password != md5($password)) {
+		// Forget cookies
+		setcookie('user', '', -1, "/");
+		setcookie('password', '', -1, "/");
+		
 		header("Location: ../index.php?wrongpassword=1");
 		die();
 	}
 	
 	// Save variables as cookies
 	setcookie('user', $user, time() + (86400 * 10), "/");
-	if ($real_password != "") setcookie('password', $password, time() + (86400 * 10), "/");
+	if ($real_password != "") setcookie('password', md5($password), time() + (86400 * 10), "/");
 	else setcookie('password', '', -1, "/");
 	
 	// Success, proceed to main page

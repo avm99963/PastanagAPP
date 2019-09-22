@@ -9,6 +9,10 @@
 		<link rel="stylesheet" href="./css/login.css" />
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js"></script>
+		
+		<script src="./js/utils.js"></script>
+		<script src="./js/animations.js"></script>
 	</head>
 	<body>
 		<div id="outter-container">
@@ -41,6 +45,13 @@
 			$('select').on('change', function() {
 				let nopassword = $('select option:selected').hasClass('nopassword');
 				$('#password').prop('disabled', nopassword);
+			});
+			
+			$(document).ready(function() {
+				// Notify of messages
+				if (getUrlParameter("passwordchanged")) read_message("La teva clau d'accés ha canviat", "error");
+				if (getUrlParameter("wrongpassword")) read_message("La clau d'accés no és correcta", "error");
+
 			});
 		</script>
 	</body>
