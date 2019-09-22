@@ -1,13 +1,10 @@
-#butons {
-	position: absolute;
-	bottom: 5%;
-	right: 0;
+table td {
+	vertical-align: top;
 }
 
 #butons button {
-	font-size: 36px;
-	height: 100px;
-	width: 70%;
+	font-size: 1.25em;
+	min-height: 2em;
 	color: white;
 	text-decoration: none;
 }
@@ -18,4 +15,38 @@ button#win {
 
 button#lose {
 	background-color: red;
+}
+
+.victima {
+	font-size: 24px;
+}
+
+#victim_img {
+	float: left;
+	width: 200px;
+	max-width: 100%;
+	margin-right: 16px;
+}
+
+#victim_name {
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-bottom: 8px;
+}
+
+#victim_curs_i_grau {
+	font-size: 1em;
+	margin-bottom: 16px;
+}
+
+@media (max-width: 700px) {
+	#victim_img {
+		width: 100px;
+	}
+
+	#victim_name {
+		font-weight: bold;
+		font-size: 1.25em;
+		margin-bottom: 8px;
+	}
 }
