@@ -35,7 +35,7 @@ function check_requests(info, user) {
 	if (info.requested) {
 		// Check for requests
 		if(info.requested) dead = confirm("El teu assassí ha dit que t'ha matat, és veritat?");
-	
+		
 		// Confirm/deny request
 		if (dead) send_request(user, "CONF DEAD"); // confirm death
 		else send_request(user, "DENY REQ"); // deny kill/death
@@ -56,11 +56,11 @@ function update_info(user) {
 			
 			// Check if user is dead
 			if (!user.mort) user.mort = check_requests(info, user);
-			else window.location.href= "./dead.php";
 			
 			// Check if there has been a change of victim					
 			if (info.quimata != user.quimata) {
-				change_victim(info);
+				if (!user.mort) change_victim(info);
+				else window.location.href = "./dead.php";
 				user.quimata = info.quimata;
 			}
 			
