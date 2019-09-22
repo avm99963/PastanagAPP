@@ -10,7 +10,7 @@
 
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script src="https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js"></script>
-		
+
 		<script src="./js/utils.js"></script>
 		<script src="./js/animations.js"></script>
 	</head>
@@ -32,10 +32,10 @@
 		<script>
 			$.post("./ajax/getusers.php", function(data, status){
 				$("#list").html(data);
-								
-				userid = <?=isset($_COOKIE['user']) ? $_COOKIE['user'] : -1 ?>;
+
+				userid = <?=isset($_COOKIE['user']) ? (int)$_COOKIE['user'] : -1 ?>;
 				username = $('option[value=' + userid + ']').text();
-		
+
 				if (userid > 0) {
 					redir = confirm("Has entrat com a usuari " + username + " anteriorment, vols tornar-ho a fer?");
 					if (redir) window.location.href = 'main.php';
@@ -46,7 +46,7 @@
 				let nopassword = $('select option:selected').hasClass('nopassword');
 				$('#password').prop('disabled', nopassword);
 			});
-			
+
 			$(document).ready(function() {
 				// Notify of messages
 				if (getUrlParameter("passwordchanged")) read_message("La teva clau d'accés ha canviat", "error");
