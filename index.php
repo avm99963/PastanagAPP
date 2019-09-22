@@ -5,6 +5,8 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
+		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
 		<link rel="stylesheet" href="./css/basic.css" />
 		<link rel="stylesheet" href="./css/login.css" />
 
@@ -44,7 +46,7 @@
 					</div>
 
 					<input disabled required placeholder="Clau d'accés..." id="password" type="password" name="password"/>
-					<input type="submit" value="Entrar" />
+					<input type="submit" value="Entrar" id="submit" />
 				</form>
 			</div>
 		</div>
@@ -57,11 +59,7 @@
 				
 				userid = <?=isset($_COOKIE['user']) ? (int)$_COOKIE['user'] : -1 ?>;
 				username = get_user_name(users, userid);
-
-				if (userid > 0) {
-					redir = confirm("Has entrat com a usuari " + username + " anteriorment, vols tornar-ho a fer?");
-					if (redir) window.location.href = 'main.php';
-				}
+				if (userid > 0) $("#search-input").prop("placeholder", username);
 			});
 
 			$(document).ready(function() {

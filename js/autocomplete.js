@@ -1,3 +1,16 @@
+function nomcurs(curs) {
+	if (curs == 1) return "1er";
+	if (curs == 2) return "2on";
+	if (curs == 3) return "3er";
+	if (curs == 4) return "4rt";	
+}
+
+function nomgrau(grau) {
+	if (grau == 0) return "MAT";
+	if (grau == 1) return "EST";
+	if (grau == 2) return "MAMME";
+}
+
 function autocomplete(inp, obj, act) {
   /*the autocomplete function takes two arguments,
   the text field element and an objay of possible autocompleted values:*/
@@ -30,7 +43,7 @@ function autocomplete(inp, obj, act) {
 
         b.innerHTML += nomNode.substr(parts[0].length, val.length);
         b.innerHTML += "<span style='font-weight: bold; position:relative; z-index:120;'>" + nomNode.substr(parts[0].length + val.length) + "</span>";
-        b.innerHTML += " <span class='autocomplete-year'>(" + obj[node].curs + "-" + obj[node].grau + ")</span>";
+        b.innerHTML += " <span class='autocomplete-year'>(" + nomcurs(obj[node].curs) + " - " + nomgrau(obj[node].grau) + ")</span>";
 
         /*include node id to keep track of which is it*/
         b.dataset.id = node;

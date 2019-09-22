@@ -20,5 +20,5 @@
 		if (!query($template)) die("An error ocurred.");
 	}
 	
-	header("Location: ./index.php");
+	die("<script>window.location.href = './index.php'</script>");
 ?>

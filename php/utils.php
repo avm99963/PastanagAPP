@@ -10,6 +10,19 @@
 			$noms = explode(" ", $this->nomcomplet);
 			return $noms[0];
 		}
+		
+		public function nomcurs() {
+			if ($this->curs == 1) return "1er";
+			if ($this->curs == 2) return "2on";
+			if ($this->curs == 3) return "3er";
+			if ($this->curs == 4) return "4rt";
+		}
+		
+		public function nomgrau() {
+			if ($this->grau == 0) return "MAT";
+			if ($this->grau == 1) return "EST";
+			if ($this->grau == 2) return "MAMME";
+		}
 	}
 	
 	function query($query) {
@@ -41,23 +54,23 @@
 			while ($row = $result->fetch_row()) {
 				if ($getAsObjects) {
 					$user = new User();
-					$user->id = $row[0];
+					$user->id = (int)$row[0];
 					$user->nomcomplet = $row[1];
-					$user->curs = $row[2];
-					$user->grau = $row[3];
-					$user->quimata = $row[4];
-					$user->requested = $row[5];
-					$user->mort = $row[6];
+					$user->curs = (int)$row[2];
+					$user->grau = (int)$row[3];
+					$user->quimata = (int)$row[4];
+					$user->requested = (int)$row[5];
+					$user->mort = (int)$row[6];
 					$user->md5password = $row[7];
 				} else {
 					$user = [];
-					$user["id"] = $row[0];
+					$user["id"] = (int)$row[0];
 					$user["nomcomplet"] = $row[1];
-					$user["curs"] = $row[2];
-					$user["grau"] = $row[3];
-					$user["quimata"] = $row[4];
-					$user["requested"] = $row[5];
-					$user["mort"] = $row[6];
+					$user["curs"] = (int)$row[2];
+					$user["grau"] = (int)$row[3];
+					$user["quimata"] = (int)$row[4];
+					$user["requested"] = (int)$row[5];
+					$user["mort"] = (int)$row[6];
 					$user["md5password"] = $row[7];
 				}
 				

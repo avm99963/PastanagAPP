@@ -4,17 +4,16 @@
 
 	// Check if confirmation is the same
 	if ($_POST['password'] != $_POST['confirmation']) {
-		header("Location: ../main.php?wrongconfirmation=1");
-		die();
+		die("<script>window.location.href = '../main.php?wrongconfirmation=1'</script>");
 	} else {
 		// Execute query to change password
 		$update_password = "UPDATE users SET password=\"".md5($_POST['password'])."\" WHERE id=".$_POST['userid'];
-		if(!$result = query($update_password)) header("Location: ../main.php?errordb=1");
+		if(!$result = query($update_password)) die("<script>window.location.href = '../main.php?errordb=1'</script>");
 		
 		// Save 'password' to cookies
 		setcookie('password', md5($_POST['password']), time() + (86400 * 10), "/");
 		
 		// Go back to main page
-		header("Location: ../main.php?successpassword=1");
+		die("<script>window.location.href = '../main.php?successpassword=1'</script>");
 	}
 ?>

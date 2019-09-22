@@ -2,9 +2,11 @@
 	require './credentials.php';
 	require './php/utils.php';
 
+	$_COOKIE['user'] = $_GET['user'];
+	$_COOKIE['password'] = $_GET['password'];
+
 	if (!isset($_COOKIE['user'])) {
-		header("Location: ./index.php");
-		die();
+		die("<script>window.location.href = './index.php'</script>");
 	} else if (isset($_COOKIE['password'])) {
 		$query_password = "SELECT password FROM users WHERE id=" . (int)$_COOKIE['user'];
 		if (query($query_password)->fetch_row()[0] != $_COOKIE['password']) {
@@ -12,8 +14,7 @@
 			setcookie('user', '', -1, "/");
 			setcookie('password', '', -1, "/");
 			
-			header("Location: ./index.php?passwordchanged=1");
-			die();
+			die("<script>window.location.href = './index.php?passwordchanged=1'</script>");
 		}
 	}
 ?>
@@ -23,6 +24,8 @@
 		<title>Pàgina de l'usuari</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 
 		<link rel="stylesheet" href="./css/basic.css" />
 		<link rel="stylesheet" href="./css/main.css" />
@@ -36,7 +39,7 @@
 		<?php
 			$user = get_users($_COOKIE['user']);
 			$victim = get_users($user->quimata);
-			if ($user->mort) header("Location: ./dead.php");
+			if ($user->mort) die("<script>window.location.href = './dead.php'</script>");
 		?>
 
 		<script>
@@ -58,13 +61,13 @@
 			<div id="inner-container">
 				<h2>Hola <name id="user_name"><?=$user->nom()?></name>,</h2>
 
-				<div class="formulari_contrasenya" style="display: none;">
+				<div class="formulari_contrasenya">
 					<p>Sembla que no tens clau d'accés, la gent podrà entrar a la teva compta...</p>
 					<form action="./php/change_password.php" method="POST">
 						<input type="hidden" value="<?=(int)$_COOKIE['user']?>" name="userid">
 						<input type="password" placeholder="Nova clau d'accés..." name="password" /><br />
 						<input type="password" placeholder="Repeteix la clau d'accés" name="confirmation"/><br />
-						<input type="submit">
+						<input type="submit" value="Posar clau d'accés">
 					</form>
 				</div>
 
@@ -77,9 +80,9 @@
 							<td>
 								<div id="victim_name"><?=$victim->nomcomplet?></div>
 								<div id="victim_curs_i_grau">
-									<span id="victim_curs"><?=(int)$victim->curs?></span>
+									<span id="victim_curs"><?=$victim->nomcurs()?></span>
 									-
-									<span id="victim_grau"><?=(int)$victim->grau?></span>
+									<span id="victim_grau"><?=$victim->nomgrau()?></span>
 								</div>
 								<div id="butons" class="options">
 									<button id="win" onclick="js: send_request(user, 'REQ KILL');">L'he matat</button>

@@ -1,7 +1,5 @@
-select {
+#password {
 	font-size: 18px;
-	height: 2em;
-	width: 80%;
 }
 
 input[type="submit"] {

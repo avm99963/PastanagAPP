@@ -26,5 +26,5 @@
 	)
 	 */
 
-	if (query($create)) header("Location: ./index.php?dbname=".$dbname);
+	if (query($create)) die("<script>window.location.href = './index.php?dbname=".$dbname."'<script>");
 ?>
