@@ -17,6 +17,8 @@
 		$template = "INSERT INTO `".$dbname."` (`id`, `nom`, `curs`, `grau`, `quimata`, `requested`, `mort`, `password`)" .
 					" VALUES (NULL, '".$user[0]."', '".$user[1]."', '".$user[2]."', ".$i.", '0', '0', '')";
 
-		if (query($template)) header("Location: ./index.php");
+		if (!query($template)) die("An error ocurred.");
 	}
+	
+	header("Location: ./index.php");
 ?>

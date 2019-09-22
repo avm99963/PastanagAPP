@@ -55,7 +55,7 @@
 				console.log(users);
 				autocomplete(document.getElementById("search-input"), users, "search");
 			
-				userid = <?=isset($_COOKIE['user']) ? $_COOKIE['user'] : -1 ?>;
+				userid = <?=isset($_COOKIE['user']) ? (int)$_COOKIE['user'] : -1 ?>;
 				username = $('option[value=' + userid + ']').text();
 		
 				if (userid > 0) {

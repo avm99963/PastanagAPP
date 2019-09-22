@@ -41,14 +41,14 @@
 
 		<script>
 			let user = {
-				'id': <?=$user->id?>,
-				'quimata': <?=$user->quimata?>,
-				'requested': <?=$user->requested?>,
-				'mort': <?=$user->mort?>,
+				'id': <?=(int)$user->id?>,
+				'quimata': <?=(int)$user->quimata?>,
+				'requested': <?=(int)$user->requested?>,
+				'mort': <?=(int)$user->mort?>,
 
 				'nom': "<?=$user->nomcomplet?>",
-				'curs': <?=$user->curs?>,
-				'grau': <?=$user->grau?>
+				'curs': <?=(int)$user->curs?>,
+				'grau': <?=(int)$user->grau?>
 			};
 		</script>
 
@@ -61,7 +61,7 @@
 				<div class="formulari_contrasenya" style="display: none;">
 					<p>Sembla que no tens clau d'accés, la gent podrà entrar a la teva compta...</p>
 					<form action="./php/change_password.php" method="POST">
-						<input type="hidden" value="<?=$_COOKIE['user']?>" name="userid">
+						<input type="hidden" value="<?=(int)$_COOKIE['user']?>" name="userid">
 						<input type="password" placeholder="Nova clau d'accés..." name="password" /><br />
 						<input type="password" placeholder="Repeteix la clau d'accés" name="confirmation"/><br />
 						<input type="submit">
@@ -77,9 +77,9 @@
 							<td>
 								<div id="victim_name"><?=$victim->nomcomplet?></div>
 								<div id="victim_curs_i_grau">
-									<span id="victim_curs"><?=$victim->curs?></span>
+									<span id="victim_curs"><?=(int)$victim->curs?></span>
 									-
-									<span id="victim_grau"><?=$victim->grau?></span>
+									<span id="victim_grau"><?=(int)$victim->grau?></span>
 								</div>
 								<div id="butons" class="options">
 									<button id="win" onclick="js: send_request(user, 'REQ KILL');">L'he matat</button>
