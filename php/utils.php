@@ -21,15 +21,15 @@
 
 		// Execute query and save result
 		if (!$result = $conn->query($query)) echo $conn->error;
-		
-		// Close the connection 
+
+		// Close the connection
 		$conn->close();
 
 		// Return result of query
 		return $result;
 	}
 
-	function get_users($id = 0, $getAsObjects = true) {
+	function get_users($id = 0) {
 		$users = [];
 
 		// Prepare the query
@@ -39,29 +39,16 @@
 		// Fetch the information of the user
 		if ($result = query($query)) {
 			while ($row = $result->fetch_row()) {
-				if ($getAsObjects) {
-					$user = new User();
+				$user = new User();
 
-					$user->id = $row[0];
-					$user->nomcomplet = $row[1];
-					$user->curs = $row[2];
-					$user->grau = $row[3];
-					$user->quimata = $row[4];
-					$user->requested = $row[5];
-					$user->mort = $row[6];
-					$user->md5password = $row[7];
-				} else {
-					$user = [];
-
-					$user["id"] = $row[0];
-					$user["nomcomplet"] = $row[1];
-					$user["curs"] = $row[2];
-					$user["grau"] = $row[3];
-					$user["quimata"] = $row[4];
-					$user["requested"] = $row[5];
-					$user["mort"] = $row[6];
-					$user["md5password"] = $row[7];
-				}
+				$user->id = $row[0];
+				$user->nomcomplet = $row[1];
+				$user->curs = $row[2];
+				$user->grau = $row[3];
+				$user->quimata = $row[4];
+				$user->requested = $row[5];
+				$user->mort = $row[6];
+				$user->md5password = $row[7];
 
 				array_push($users, $user);
 			}
