@@ -17,7 +17,7 @@
 	<body>
 		<div id="outter-container">
 			<div id="inner-container">
-				<h1>Selecciona el teu nom</h1>
+				<h1>Introdueix el teu nom</h1>
 				<p>Per entrar al joc de la Pastanaga Assessina</p>
 				<form action="./php/login.php" method="POST">
 					<input type="hidden" name="user" id="user">
