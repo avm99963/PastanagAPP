@@ -3,11 +3,18 @@
 	require '../php/utils.php';
 	$users = get_users(0, false);
 
-	foreach ($users as &$user) {
+	$return = [];
+
+	foreach ($users as $user) {
 		if ($user["mort"]) continue;
 
-		$user["nopassword"] = $user["md5password"] == "" ? "nopassword" : "";
-		unset($user["md5password"]);
+		$return[] = [
+			"id" => $user["id"],
+			"nomcomplet" => $user["nomcomplet"],
+			"grau" => $user["grau"],
+			"curs" => $user["curs"],
+			"nopassword" => ($user["md5password"] == "" ? "nopassword" : "")
+		];
 	}
 
-	echo json_encode($users);
+	echo json_encode($return);
