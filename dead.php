@@ -2,6 +2,31 @@
 	// Forget cookies
 	setcookie('user', '', -1, "/");
 	setcookie('password', '', -1, "/");
-	
-	echo "R.I.P.";
 ?>
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Pàgina de benvinguda</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+		<link rel="stylesheet" href="./css/basic.css" />
+
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js"></script>
+		
+		<script src="./js/utils.js"></script>
+	</head>
+	<body>
+		<div id="outter-container">
+			<div id="inner-container">
+				<h1>Estàs mort!</h1>
+				<p>Torna a la pàgina principal.</p>
+				<a href="./index.php">Go back</a>
+			</div>
+		</div>
+	</body>
+</html>
+

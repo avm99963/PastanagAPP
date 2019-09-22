@@ -21,7 +21,7 @@
 			<div id="inner-container">
 				<h1>Selecciona el teu nom</h1>
 				<p>Per entrar al joc de la Pastanaga Assessina</p>
-				<form action="./php/login.php" method="POST">
+				<form action="./main.php" method="POST">
 					<input type="hidden" name="user" id="user">
 
 					<!-- MD Search Box -->

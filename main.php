@@ -2,14 +2,19 @@
 	require './credentials.php';
 	require './php/utils.php';
 
-	$_COOKIE['user'] = $_GET['user'];
-	$_COOKIE['password'] = $_GET['password'];
+	$user = (int)$_POST['user'];
+	$password = $_POST['password'] == '' ? '' : md5($_POST['password']);
 
-	if (!isset($_COOKIE['user'])) {
+		// Check if password is correct
+		$query_password = "SELECT password FROM users WHERE id=".$user;
+		$real_password = query($query_password)->fetch_row()[0];
+		if ($real_password != $password) die("<script>window.location.href = './index.php?wrongpassword=1'</script>");
+
+	if (!isset($_POST['user'])) {
 		die("<script>window.location.href = './index.php'</script>");
-	} else if (isset($_COOKIE['password'])) {
-		$query_password = "SELECT password FROM users WHERE id=" . (int)$_COOKIE['user'];
-		if (query($query_password)->fetch_row()[0] != $_COOKIE['password']) {
+	} else if (isset($_POST['password'])) {
+		$query_password = "SELECT password FROM users WHERE id=$user";
+		if (query($query_password)->fetch_row()[0] != $password) {
 			// Unset variables
 			setcookie('user', '', -1, "/");
 			setcookie('password', '', -1, "/");
@@ -37,7 +42,7 @@
 		<script src="./js/animations.js"></script>
 
 		<?php
-			$user = get_users($_COOKIE['user']);
+			$user = get_users($user);
 			$victim = get_users($user->quimata);
 			if ($user->mort) die("<script>window.location.href = './dead.php'</script>");
 		?>
@@ -62,9 +67,9 @@
 				<h2>Hola <name id="user_name"><?=$user->nom()?></name>,</h2>
 
 				<div class="formulari_contrasenya">
-					<p>Sembla que no tens clau d'accés, la gent podrà entrar a la teva compta...</p>
+					<p>Sembla que no tens clau d'accés, la gent podrà entrar al teu compte...</p>
 					<form action="./php/change_password.php" method="POST">
-						<input type="hidden" value="<?=(int)$_COOKIE['user']?>" name="userid">
+						<input type="hidden" value="<?=(int)$_POST['user']?>" name="userid">
 						<input type="password" placeholder="Nova clau d'accés..." name="password" /><br />
 						<input type="password" placeholder="Repeteix la clau d'accés" name="confirmation"/><br />
 						<input type="submit" value="Posar clau d'accés">

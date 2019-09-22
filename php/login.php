@@ -33,8 +33,6 @@
 	if ($real_password != "") setcookie('password', md5($password), time() + (86400 * 10), "/");
 	else setcookie('password', '', -1, "/");
 	
-	echo "<script>window.location.href = '../main.php?user=$user&password=$password'; </script>";
-	
 	// Success, proceed to main page
-	// die("<script>window.location.href = '../main.php?user='.$user.'&password='.$password</script>");
+	die("<script>window.location.href = '../main.php';</script>");
 ?>

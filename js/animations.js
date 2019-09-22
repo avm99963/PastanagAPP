@@ -1,8 +1,6 @@
 function change_victim(user) {
-	$(".victima").fadeOut(400, function() {
-		$(".victima").load('./ajax/victiminfo.php?userid=' + user.id + " #victim_info");
-		$(".victima").fadeIn(400);
-	});
+	let loadURL = './ajax/victiminfo.php?userid=' + user.id + ' #victim_info';
+	$(".victima").fadeOut('slow').load(loadURL).fadeIn('slow');
 }
 
 function read_message(msg, type) {
