@@ -1,4 +1,17 @@
 <?php
+	function nomcurs($curs) {
+		if ($curs == 1) return "1r";
+		if ($curs == 2) return "2n";
+		if ($curs == 3) return "3r";
+		if ($curs == 4) return "4t";
+	}
+	
+	function nomgrau($grau) {
+		if ($grau == 0) return "MAT";
+		if ($grau == 1) return "EST";
+		if ($grau == 2) return "MAMME";
+	}
+
 	class User{
 		public $id;
 		public $nomcomplet;
@@ -12,16 +25,11 @@
 		}
 		
 		public function nomcurs() {
-			if ($this->curs == 1) return "1er";
-			if ($this->curs == 2) return "2on";
-			if ($this->curs == 3) return "3er";
-			if ($this->curs == 4) return "4rt";
+			return nomcurs($this->curs);
 		}
 		
 		public function nomgrau() {
-			if ($this->grau == 0) return "MAT";
-			if ($this->grau == 1) return "EST";
-			if ($this->grau == 2) return "MAMME";
+			return nomgrau($this->grau);
 		}
 	}
 	

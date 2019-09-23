@@ -1,24 +1,93 @@
+body {
+	background-image: url('https://images.unsplash.com/photo-1428196457394-f0c4aec5f574?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80');
+	background-size: cover;
+}
+
+header {
+	margin-top: 25px;
+	margin-bottom: 100px;
+	font-family: 'Open Sans';
+	display: block;
+}
+
+header a {
+	font-size: 40px;
+	text-decoration: none;
+}
+
+header #leftlinks {
+	padding-left: 20px;
+	float: left;
+}
+
+header #rightlinks {
+	margin-right: 20px;
+	float: right;
+}
+
+div#outter-container {
+	width: 95%;
+	margin: 32px auto;
+}
+
 #inner-container {
 	background-color: white;
+	padding: 25px;
 }
 
 p {
 	font-size: 16px;
 	text-align: justify;
+	display: none;
+	width: 95%;
+	margin: auto;
+	margin-bottom: 25px;
+}
+
+#table-container {
+	overflow: scroll;
+}
+
+div#table-container {
+	display: inline-block;
+	width: 100%;
+	margin: 0 auto;
 }
 
 table#ranking {
-	font-size: 18px;
+	font-size: 48px;
 	text-align: center;
-
 	font-family: 'Open Sans';
-  	
 	margin: auto;
-	width: 100%;
 }
 
 table#ranking td {
-	padding: 10px;
+	padding: 15px;
+	height: 50px;
+	
+	max-width: 400px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+td div.username {
+	font-size: 40px;
+}
+
+td div.userinfo {
+	font-size: 36px;
+	color: rgb(100,100,100);
+}
+
+td.name {
+	text-align: left;
+}
+
+tr#header th {
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 tr.gold {
@@ -39,9 +108,9 @@ tr.me {
 
 tr.top3 td:first-child::before {
 	content: '';
-	background-size: 16px 16px;
-	width: 16px;
-	height: 16px;
+	background-size: 48px 48px;
+	width: 48px;
+	height: 48px;
 	float: left;
 	position: relative;
 	top: 0px;

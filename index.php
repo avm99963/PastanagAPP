@@ -55,6 +55,7 @@
 				</form>
 				
 				<p>La primera persona que entri al teu compte tindrà l'oportunitat de canviar la contrasenya.</p>
+				<a href="./ranking.php">Anar al rànquing</a>
 			</div>
 		</div>
 
