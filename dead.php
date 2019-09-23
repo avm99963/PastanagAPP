@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Pàgina de benvinguda</title>
+		<title>PastanagAPP - Mort/a</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,7 +22,7 @@
 	<body>
 		<div id="outter-container">
 			<div id="inner-container">
-				<h1>Estàs mort!</h1>
+				<h1>Estàs mort/a!</h1>
 				<p>Torna a la pàgina principal.</p>
 				<a href="./index.php">Go back</a>
 			</div>

@@ -9,8 +9,8 @@
 
 <table id="victim_info">
 	<tr>
-		<td><img id="victim_img" src="https://picsum.photos/id/<?=$victim->id?>/200/200" /></td>
-		<td>
+		<td class="table_img"><img id="victim_img" src="https://picsum.photos/id/<?=$victim->id?>/200/200" /></td>
+		<td class="table_text">
 			<div id="victim_name"><?=$victim->nomcomplet?></div>
 			<div id="victim_curs_i_grau">
 				<span id="victim_curs"><?=$victim->nomcurs()?></span>

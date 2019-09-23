@@ -1,5 +1,8 @@
 #password {
-	font-size: 18px;
+	font-size: 14px;
+	line-height: 1.75em;
+	font-family: 'Open Sans';
+	text-indent: 10px;
 }
 
 input[type="submit"] {

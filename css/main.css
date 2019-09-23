@@ -2,8 +2,27 @@ body {
 	font-size: 18px;
 }
 
+.goback {
+	font-size: 14px;
+	font-family: 'Open Sans';
+	float: right;
+	text-decoration: none;
+}
+
+#inner-container {
+	padding-bottom: 50px;
+}
+
 table td {
 	vertical-align: top;
+}
+
+td.table_text {
+	padding-left: 10px;
+}
+
+td.table_img {
+	padding-top: 10px;
 }
 
 #butons button {

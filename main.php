@@ -1,16 +1,16 @@
 <?php	
 	require './credentials.php';
 	require './php/utils.php';
-
+	
 	$user = (int)$_POST['user'];
-	$password = $_POST['password'] == '' ? '' : md5($_POST['password']);
+	$password = isset($_POST['password']) ? md5($_POST['password']) : '';
 
 		// Check if password is correct
 		$query_password = "SELECT password FROM users WHERE id=".$user;
 		$real_password = query($query_password)->fetch_row()[0];
 		if ($real_password != $password) die("<script>window.location.href = './index.php?wrongpassword=1'</script>");
 
-	if (!isset($_POST['user'])) {
+	if (!isset($_POST['user']) or $_POST['user'] == '') {
 		die("<script>window.location.href = './index.php'</script>");
 	} else if (isset($_POST['password'])) {
 		$query_password = "SELECT password FROM users WHERE id=$user";
@@ -26,9 +26,17 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Pàgina de l'usuari</title>
+		<title>PastanagAPP</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="manifest" href="https://api.myjson.com/bins/u6r41">
+
+		<!-- Apple web app -->
+		<link rel="apple-touch-icon" href="./bin/images/icons/icon-72x72.png">
+		<meta name="apple-mobile-web-app-title" content="PastanagAPP">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="green">
+
 
 		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 
@@ -64,6 +72,7 @@
 	<body>
 		<div id="outter-container">
 			<div id="inner-container">
+				<a href="./index.php" class="goback">Torna a la pàgina principal</a><br />
 				<h2>Hola <name id="user_name"><?=$user->nom()?></name>,</h2>
 
 				<div class="formulari_contrasenya">
@@ -81,8 +90,8 @@
 				<div class="victima">
 					<table>
 						<tr>
-							<td><img id="victim_img" src="https://picsum.photos/id/<?=$victim->id?>/200/200" /></td>
-							<td>
+							<td class="table_img"><img id="victim_img" src="https://picsum.photos/id/<?=$victim->id?>/200/200" /></td>
+							<td class="table_text">
 								<div id="victim_name"><?=$victim->nomcomplet?></div>
 								<div id="victim_curs_i_grau">
 									<span id="victim_curs"><?=$victim->nomcurs()?></span>
@@ -110,11 +119,6 @@
 					$.notify("No tens clau d'accés", "info");
 					$(".formulari_contrasenya").show();
 				}
-				
-				// Notify of messages
-				if (getUrlParameter("wrongconfirmation")) read_message("Les contrasenyes no coincideixen", "error");
-				if (getUrlParameter("errordb")) read_message("Hi ha hagut un problema a la base de dades, torna-ho a intentar", "error");
-				if (getUrlParameter("successpassword")) read_message("La teva clau d'accés s'ha guardat", "success");
 			});
 		</script>
 	</body>
