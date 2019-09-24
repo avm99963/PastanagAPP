@@ -2,18 +2,22 @@
 	require './credentials.php';
 	require './php/utils.php';
 	
+	$credentials = new Credentials();
+	$usersdb = $credentials->usersdb;
+	$mortsdb = $credentials->mortsdb;
+	
 	$user = (int)$_POST['user'];
 	$password = isset($_POST['password']) ? md5($_POST['password']) : '';
 
 		// Check if password is correct
-		$query_password = "SELECT password FROM users WHERE id=".$user;
+		$query_password = "SELECT password FROM $usersdb WHERE id=$user";
 		$real_password = query($query_password)->fetch_row()[0];
 		if ($real_password != $password) die("<script>window.location.href = './index.php?wrongpassword=1'</script>");
 
 	if (!isset($_POST['user']) or $_POST['user'] == '') {
 		die("<script>window.location.href = './index.php'</script>");
 	} else if (isset($_POST['password'])) {
-		$query_password = "SELECT password FROM users WHERE id=$user";
+		$query_password = "SELECT password FROM $usersdb WHERE id=$user";
 		if (query($query_password)->fetch_row()[0] != $password) {
 			// Unset variables
 			setcookie('user', '', -1, "/");

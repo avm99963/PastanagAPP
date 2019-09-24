@@ -10,21 +10,21 @@
 <?php
 	require './credentials.php';
 	require './php/utils.php';
-
-	// $getranking = "SELECT morts.assassi AS id, users.grau, users.curs, count(morts.assassi) AS kills FROM morts INNER JOIN users ON morts.assassi = users.id GROUP BY morts.assassi";
-	// $getranking = "SELECT morts.assassi AS id, users.grau, users.curs, count(morts.assassi) AS kills, sum(CASE WHEN morts.grau = users.grau THEN 1 ELSE 2 END) AS kills_pondered FROM morts INNER JOIN users ON morts.assassi = users.id GROUP BY morts.assassi ORDER BY kills_pondered DESC";
-	// Mateix grau i curs => 1, Mateix grau diferent curs => 2, Diferent grau => 3
-	// $getranking = "SELECT morts.assassi AS id, users.grau, users.curs, count(morts.assassi) AS kills, sum(CASE WHEN morts.grau = users.grau AND morts.curs = users.curs THEN 1 WHEN morts.grau = users.grau AND morts.curs != users.curs THEN 2 ELSE 3 END) AS kills_pondered FROM morts INNER JOIN users ON morts.assassi = users.id GROUP BY morts.assassi ORDER BY kills_pondered DESC";
-
+	
+	$credentials = new Credentials();
+	$usersdb = $credentials->usersdb;
+	$mortsdb = $credentials->mortsdb;
+	
 	// Mateix grau i curs => 100, Mateix grau diferent curs => 150, Diferent grau => 200
-	$getranking = "SELECT morts.assassi AS id, users.nom, users.grau, users.curs, count(morts.assassi) AS kills,
-					sum(morts.grau = users.grau AND morts.curs = users.curs) AS companys_classe,
-					sum(morts.grau = users.grau AND morts.curs != users.curs) AS companys_grau,
-					sum(morts.grau != users.grau) AS companys_facu,
-					sum(CASE WHEN morts.grau = users.grau AND morts.curs = users.curs THEN 100 WHEN morts.grau = users.grau AND morts.curs != users.curs THEN 150 ELSE 200 END) AS score
-					FROM morts INNER JOIN users ON morts.assassi = users.id GROUP BY morts.assassi ORDER BY score DESC";
-
+	$getranking = "SELECT $mortsdb.assassi AS id, $usersdb.nom, $usersdb.grau, $usersdb.curs, count($mortsdb.assassi) AS kills,
+					sum($mortsdb.grau = $usersdb.grau AND $mortsdb.curs = $usersdb.curs) AS companys_classe,
+					sum($mortsdb.grau = $usersdb.grau AND $mortsdb.curs != $usersdb.curs) AS companys_grau,
+					sum($mortsdb.grau != $usersdb.grau) AS companys_facu,
+					sum(CASE WHEN $mortsdb.grau = $usersdb.grau AND $mortsdb.curs = $usersdb.curs THEN 100 WHEN $mortsdb.grau = $usersdb.grau AND $mortsdb.curs != $usersdb.curs THEN 150 ELSE 200 END) AS score
+					FROM $mortsdb INNER JOIN $usersdb ON $mortsdb.assassi = $usersdb.id GROUP BY $mortsdb.assassi ORDER BY score DESC";
+	
 	$results = query($getranking);
+	// die($getranking);
 ?>
 
 <div id="outter-container">

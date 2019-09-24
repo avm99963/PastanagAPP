@@ -22,9 +22,9 @@
 	  `assassi` int(11) NOT NULL,
 	  `curs` tinyint(1) NOT NULL,
 	  `grau` tinyint(1) NOT NULL,
-	  `data` date NOT NULL DEFAULT current_timestamp()
+	  `data` timestamp NOT NULL DEFAULT current_timestamp()
 	)"];
 	
-	foreach ($queries as $query) if (!query($query)) die('An error ocurred.');
+	foreach ($queries as $query) if (!query($query)) die('An error ocurred. ' . $query);
 	die("<script>window.location.href = './index.php?dbname=$dbname'</script>");
 ?>

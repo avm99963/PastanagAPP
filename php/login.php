@@ -1,7 +1,11 @@
 <?php
 	require '../credentials.php';
 	require 'utils.php';
-	
+
+	$credentials = new Credentials();
+	$usersdb = $credentials->usersdb;
+	$mortsdb = $credentials->mortsdb;
+
 	// Set the 'user' POST and COOKIE variable
 	$user = '';
 	if (isset($_POST['user'])) $user = $_POST['user'];
@@ -11,7 +15,7 @@
 	}
 	
 	// Check if password is correct
-	$query_password = "SELECT password FROM users WHERE id=".$user;
+	$query_password = "SELECT password FROM $usersdb WHERE id=".$user;
 	$real_password = query($query_password)->fetch_row()[0];
 	
 	// Prioritize input rather than memory
