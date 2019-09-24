@@ -52,7 +52,7 @@
 		<?php
 			$user = get_users($user);
 			$victim = get_users($user->quimata);
-			// if ($user->mort) die("<script>window.location.href = './dead.php'</script>");
+			if ($user->mort) die("<script>window.location.href = './dead.php'</script>");
 			
 			$bits = dec2bits($user->bits);	
 			$bit_counter = 0;

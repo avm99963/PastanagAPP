@@ -60,7 +60,7 @@ function update_info(user) {
 			// Check if there has been a change of victim					
 			if (info.quimata != user.quimata) {
 				if (!user.mort) change_victim(info);
-				// else window.location.href = "./dead.php";
+				else window.location.href = "./dead.php";
 				user.quimata = info.quimata;
 			}
 			
