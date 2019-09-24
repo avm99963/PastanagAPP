@@ -52,7 +52,10 @@
 		<?php
 			$user = get_users($user);
 			$victim = get_users($user->quimata);
-			if ($user->mort) die("<script>window.location.href = './dead.php'</script>");
+			// if ($user->mort) die("<script>window.location.href = './dead.php'</script>");
+			
+			$bits = dec2bits($user->bits);	
+			$bit_counter = 0;
 		?>
 
 		<script>
@@ -90,7 +93,27 @@
 				<div class="victima">
 					<table>
 						<tr>
-							<td class="table_img"><img id="victim_img" src="https://picsum.photos/id/<?=$victim->id?>/200/200" /></td>
+							<td class="table_img">
+								<div id="victim_img">
+									<table cellspacing="0" cellpadding="0">
+										<tr>
+											<td><img src="./bin/images/imgs/<?=$victim->id?>/slice_01_01.png" width="33" class="<?=(int)$bits[$bit_counter++] ? 'black' : ''?>" /></td>
+											<td><img src="./bin/images/imgs/<?=$victim->id?>/slice_01_02.png" width="33" class="<?=(int)$bits[$bit_counter++] ? 'black' : ''?>" /></td>
+											<td><img src="./bin/images/imgs/<?=$victim->id?>/slice_01_03.png" width="33" class="<?=(int)$bits[$bit_counter++] ? 'black' : ''?>" /></td>
+										</tr>
+										<tr>
+											<td><img src="./bin/images/imgs/<?=$victim->id?>/slice_02_01.png" width="33" class="<?=(int)$bits[$bit_counter++] ? 'black' : ''?>" /></td>
+											<td><img src="./bin/images/imgs/<?=$victim->id?>/slice_02_02.png" width="33" class="<?=(int)$bits[$bit_counter++] ? 'black' : ''?>" /></td>
+											<td><img src="./bin/images/imgs/<?=$victim->id?>/slice_02_03.png" width="33" class="<?=(int)$bits[$bit_counter++] ? 'black' : ''?>" /></td>
+										</tr>
+										<tr>
+											<td><img src="./bin/images/imgs/<?=$victim->id?>/slice_03_01.png" width="33" class="<?=(int)$bits[$bit_counter++] ? 'black' : ''?>" /></td>
+											<td><img src="./bin/images/imgs/<?=$victim->id?>/slice_03_02.png" width="33" class="<?=(int)$bits[$bit_counter++] ? 'black' : ''?>" /></td>
+											<td><img src="./bin/images/imgs/<?=$victim->id?>/slice_03_03.png" width="33" class="<?=(int)$bits[$bit_counter++] ? 'black' : ''?>" /></td>
+										</tr>
+									</table>
+								</div>
+							</td>
 							<td class="table_text">
 								<div id="victim_name"><?=$victim->nomcomplet?></div>
 								<div id="victim_curs_i_grau">

@@ -70,6 +70,7 @@
 					$user->requested = (int)$row[5];
 					$user->mort = (int)$row[6];
 					$user->md5password = $row[7];
+					$user->bits = $row[8];
 				} else {
 					$user = [];
 					$user["id"] = (int)$row[0];
@@ -80,6 +81,7 @@
 					$user["requested"] = (int)$row[5];
 					$user["mort"] = (int)$row[6];
 					$user["md5password"] = $row[7];
+					$user["bits"] = $row[8];
 				}
 				
 				array_push($users, $user);
@@ -91,5 +93,12 @@
 		
 		if ($id > 0) return $users[0];
 		else return $users;
+	}
+	
+	// Number n to XXXXXXXXX with X = {0,1} binary format
+	function dec2bits($code) {
+		$bits = decbin($code);
+		while (strlen($bits) < 9) $bits = '0' . $bits;
+		return $bits;
 	}
 ?>

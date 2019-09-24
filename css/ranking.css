@@ -58,7 +58,8 @@ table#ranking {
 	font-size: 48px;
 	text-align: center;
 	font-family: 'Open Sans';
-	margin: auto;
+	margin: 25px auto;
+	width: 95%;
 }
 
 table#ranking td {

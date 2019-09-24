@@ -46,9 +46,12 @@ button#lose {
 
 #victim_img {
 	float: left;
-	width: 200px;
 	max-width: 100%;
 	margin-right: 16px;
+}
+
+img.black {
+	filter: brightness(0%);
 }
 
 #victim_name {
