@@ -7,8 +7,7 @@
 	if (isset($_POST['user'])) $user = $_POST['user'];
 	else if (isset($_COOKIE['user'])) $user = $_COOKIE['user'];
 	else {
-		header("Location: ../index.php");
-		die();
+		die("<script>window.location.href = '../index.php'</script>");
 	}
 	
 	// Check if password is correct
@@ -26,8 +25,7 @@
 		setcookie('user', '', -1, "/");
 		setcookie('password', '', -1, "/");
 		
-		header("Location: ../index.php?wrongpassword=1");
-		die();
+		die("<script>window.location.href = '../index.php?wrongpassword=1'</script>");
 	}
 	
 	// Save variables as cookies
@@ -36,5 +34,5 @@
 	else setcookie('password', '', -1, "/");
 	
 	// Success, proceed to main page
-	header("Location: ../main.php");
+	die("<script>window.location.href = '../main.php';</script>");
 ?>

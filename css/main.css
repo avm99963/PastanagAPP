@@ -2,8 +2,27 @@ body {
 	font-size: 18px;
 }
 
+.goback {
+	font-size: 14px;
+	font-family: 'Open Sans';
+	float: right;
+	text-decoration: none;
+}
+
+#inner-container {
+	padding-bottom: 50px;
+}
+
 table td {
 	vertical-align: top;
+}
+
+td.table_text {
+	padding-left: 10px;
+}
+
+td.table_img {
+	padding-top: 10px;
 }
 
 #butons button {
@@ -27,9 +46,12 @@ button#lose {
 
 #victim_img {
 	float: left;
-	width: 200px;
 	max-width: 100%;
 	margin-right: 16px;
+}
+
+img.black {
+	filter: brightness(0%);
 }
 
 #victim_name {
@@ -53,4 +75,12 @@ button#lose {
 		font-size: 1.25em;
 		margin-bottom: 8px;
 	}
+}
+
+.formulari_contrasenya {
+	padding: 5px 20px;
+	font-size: 18px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-bottom: solid grey 1px;
+	display: none;
 }

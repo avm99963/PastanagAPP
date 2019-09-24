@@ -1,7 +1,8 @@
-select {
-	font-size: 18px;
-	height: 2em;
-	width: 80%;
+#password {
+	font-size: 14px;
+	line-height: 1.75em;
+	font-family: 'Open Sans';
+	text-indent: 10px;
 }
 
 input[type="submit"] {

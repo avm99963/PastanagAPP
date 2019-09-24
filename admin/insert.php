@@ -14,11 +14,11 @@
 	foreach ($inscrits as $user) {
 		$i = ($i + 1) % ($start + count($inscrits));
 		if ($i == 0) $i = $i + 1;
-		$template = "INSERT INTO `".$dbname."` (`id`, `nom`, `curs`, `grau`, `quimata`, `requested`, `mort`, `password`)" .
-					" VALUES (NULL, '".$user[0]."', '".$user[1]."', '".$user[2]."', ".$i.", '0', '0', '')";
+		$template = "INSERT INTO `".$dbname."` (`id`, `nom`, `curs`, `grau`, `quimata`, `requested`, `mort`, `password`, `bits`)" .
+					" VALUES (NULL, '".$user[0]."', '".$user[1]."', '".$user[2]."', ".$i.", 0, 0, '', ".(int)rand(1,512).")";
 
 		if (!query($template)) die("An error ocurred.");
 	}
 	
-	header("Location: ./index.php");
+	die("<script>window.location.href = './index.php'</script>");
 ?>

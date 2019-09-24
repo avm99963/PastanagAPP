@@ -1,4 +1,17 @@
 <?php
+	function nomcurs($curs) {
+		if ($curs == 1) return "1r";
+		if ($curs == 2) return "2n";
+		if ($curs == 3) return "3r";
+		if ($curs == 4) return "4t";
+	}
+	
+	function nomgrau($grau) {
+		if ($grau == 0) return "MAT";
+		if ($grau == 1) return "EST";
+		if ($grau == 2) return "MAMME";
+	}
+
 	class User{
 		public $id;
 		public $nomcomplet;
@@ -9,6 +22,14 @@
 		public function nom() {
 			$noms = explode(" ", $this->nomcomplet);
 			return $noms[0];
+		}
+		
+		public function nomcurs() {
+			return nomcurs($this->curs);
+		}
+		
+		public function nomgrau() {
+			return nomgrau($this->grau);
 		}
 	}
 	
@@ -41,24 +62,26 @@
 			while ($row = $result->fetch_row()) {
 				if ($getAsObjects) {
 					$user = new User();
-					$user->id = $row[0];
+					$user->id = (int)$row[0];
 					$user->nomcomplet = $row[1];
-					$user->curs = $row[2];
-					$user->grau = $row[3];
-					$user->quimata = $row[4];
-					$user->requested = $row[5];
-					$user->mort = $row[6];
+					$user->curs = (int)$row[2];
+					$user->grau = (int)$row[3];
+					$user->quimata = (int)$row[4];
+					$user->requested = (int)$row[5];
+					$user->mort = (int)$row[6];
 					$user->md5password = $row[7];
+					$user->bits = $row[8];
 				} else {
 					$user = [];
-					$user["id"] = $row[0];
+					$user["id"] = (int)$row[0];
 					$user["nomcomplet"] = $row[1];
-					$user["curs"] = $row[2];
-					$user["grau"] = $row[3];
-					$user["quimata"] = $row[4];
-					$user["requested"] = $row[5];
-					$user["mort"] = $row[6];
+					$user["curs"] = (int)$row[2];
+					$user["grau"] = (int)$row[3];
+					$user["quimata"] = (int)$row[4];
+					$user["requested"] = (int)$row[5];
+					$user["mort"] = (int)$row[6];
 					$user["md5password"] = $row[7];
+					$user["bits"] = $row[8];
 				}
 				
 				array_push($users, $user);
@@ -70,5 +93,12 @@
 		
 		if ($id > 0) return $users[0];
 		else return $users;
+	}
+	
+	// Number n to XXXXXXXXX with X = {0,1} binary format
+	function dec2bits($code) {
+		$bits = decbin($code);
+		while (strlen($bits) < 9) $bits = '0' . $bits;
+		return $bits;
 	}
 ?>

@@ -3,8 +3,9 @@
 	require '../php/utils.php';
 	
 	$dbname = $_GET['dbname'];
+	$mortsname = $dbname . "_morts"; 
 	
-	$create = "CREATE TABLE `".$dbname."` (
+	$queries = ["CREATE TABLE `$dbname` (
 	  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	  `nom` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
 	  `curs` tinyint(1) NOT NULL,
@@ -12,19 +13,18 @@
 	  `quimata` int(11) NOT NULL,
 	  `requested` tinyint(1) NOT NULL DEFAULT 0,
 	  `mort` tinyint(1) NOT NULL DEFAULT 0,
-	  `password` varchar(100) NOT NULL DEFAULT ''
-	)";
-
-	/*
-	CREATE TABLE `morts` (
+	  `password` varchar(100) NOT NULL DEFAULT '',
+	  `bits` int(3) NOT NULL
+	)",
+	"CREATE TABLE `$mortsname` (
 	  `id` int(11) NOT NULL,
 	  `quimatava` int(11) NOT NULL,
 	  `assassi` int(11) NOT NULL,
 	  `curs` tinyint(1) NOT NULL,
 	  `grau` tinyint(1) NOT NULL,
 	  `data` date NOT NULL DEFAULT current_timestamp()
-	)
-	 */
-
-	if (query($create)) header("Location: ./index.php?dbname=".$dbname);
+	)"];
+	
+	foreach ($queries as $query) if (!query($query)) die('An error ocurred.');
+	die("<script>window.location.href = './index.php?dbname=$dbname'</script>");
 ?>
