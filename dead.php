@@ -25,6 +25,7 @@
 				<h1>Estàs mort/a!</h1>
 				<p>Torna a la pàgina principal.</p>
 				<a href="./index.php">Go back</a>
+				<a href="./ranking.php">Anar al rànquing</a>
 			</div>
 		</div>
 	</body>

@@ -1,4 +1,5 @@
 <?php
+
 	function nomcurs($curs) {
 		if ($curs == 1) return "1r";
 		if ($curs == 2) return "2n";
@@ -53,8 +54,12 @@
 	function get_users($id = 0, $getAsObjects = true) {
 		$users = [];
 		
+		$credentials = new Credentials();
+		$usersdb = $credentials->usersdb;
+		$mortsdb = $credentials->mortsdb;
+		
 		// Prepare the query
-		$query = "SELECT * FROM users";
+		$query = "SELECT * FROM $usersdb";
 		if ($id > 0) $query .= " WHERE id=".$id;
 
 		// Fetch the information of the user
